@@ -323,7 +323,7 @@ window.addEventListener('load', () => {
     calcularDiasAmistad();
     mostrarDatoRandom();
     
-    setInterval(mostrarDatoRandom, 30000);
+    setInterval(mostrarDatoRandom, 3000);
     
     const modal = new bootstrap.Modal(document.getElementById('modalEntrada'));
     modal.show();
