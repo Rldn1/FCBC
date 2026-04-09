@@ -73,15 +73,14 @@ modoBtn.addEventListener('click', () => {
 
 // Frases para el botón del footer
 const frasesFooter = [
-     '"La amistad es el único bug que no quiero arreglar"',
-    '"Eres de esas personas que hacen que el mundo sea mejor solo con existir"',
-    '"Gracias por estar siempre, incluso cuando no te lo pido"',
-    '"A veces no hace falta decir nada, solo saber que estás ahí"',
-    '"La vida es más bonita cuando tienes amigos como tú"',
-    '"No sabes cuánto valoro cada consejo, cada risa y cada silencio compartido"',
-    '"Que tengas razones para sonreír siempre, te lo mereces todo"',
-    '"Gracias por ser mi compañero en esta aventura llamada universidad"',
-    '"La gente como tú es la que hace que valga la pena seguir adelante"'
+    '"La amistad es como el café: calienta el alma."',
+    '"Eres de esas personas que hacen que el mundo sea mejor."',
+    '"Gracias por estar siempre, incluso cuando no te lo pido."',
+    '"Un bug sin solución... llamarse Rataudiel"',
+    '"De la U a la vida, siempre cómplices."',
+    '"El introvertido que me adoptó."',
+    '"Contigo los frappes saben mejor."',
+    '"Buenísimo, creo."'
 ];
 
 const btnFraseFooter = document.getElementById('btnFraseFooter');
@@ -187,8 +186,8 @@ function mostrarDatoRandom() {
     if (datoElement) datoElement.innerHTML = datosRandom[randomIndex];
 }
 
-// ========== 100 COSAS (primeras 20 reales, luego "Por conocer") ==========
-const cosasReales = [
+// ========== 100 COSAS ==========
+const todasLasCosas = [
     "Su color favorito es el azul profundo",
     "Escucha música a diario",
     "Su película favorita es Avatar (los Navi)",
@@ -211,39 +210,108 @@ const cosasReales = [
     "Siempre hace espacio para sus amigos aunque esté ocupado"
 ];
 
-// Generar del 21 al 100 como "Por conocer..."
-for (let i = 21; i <= 100; i++) {
-    cosasReales.push(`Por conocer... (dato ${i})`);
+// Completar hasta 100 con "Por conocer..."
+for (let i = todasLasCosas.length + 1; i <= 100; i++) {
+    todasLasCosas.push(`Por conocer... (dato ${i})`);
 }
 
-function mostrarCosas(limit) {
+let cosasExpandidas = false;
+
+function mostrarCosas() {
     const container = document.getElementById('contenedor100Cosas');
     if (!container) return;
     
-    const cosasMostrar = cosasReales.slice(0, limit);
-    
-    const col1 = cosasMostrar.filter((_, idx) => idx % 3 === 0);
-    const col2 = cosasMostrar.filter((_, idx) => idx % 3 === 1);
-    const col3 = cosasMostrar.filter((_, idx) => idx % 3 === 2);
-    
     let html = `<div class="row">`;
-    html += `<div class="col-md-4"><ul class="list-unstyled">${col1.map((item, i) => `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${i*3+1}. ${item}</li>`).join('')}</ul></div>`;
-    html += `<div class="col-md-4"><ul class="list-unstyled">${col2.map((item, i) => `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${i*3+2}. ${item}</li>`).join('')}</ul></div>`;
-    html += `<div class="col-md-4"><ul class="list-unstyled">${col3.map((item, i) => `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${i*3+3}. ${item}</li>`).join('')}</ul></div>`;
-    html += `</div>`;
     
-    if (limit < cosasReales.length) {
-        html += `<div class="text-center mt-4"><button id="btnLeerMas" class="btn-ver-mas"><i class="bi bi-arrow-down-circle"></i> Leer más (${cosasReales.length - limit} restantes)</button></div>`;
+    if (!cosasExpandidas) {
+        // Modo contraído: mostrar solo 30 cosas (10 por columna)
+        const primeras30 = todasLasCosas.slice(0, 30);
+        
+        // Dividir en 3 columnas de 10 elementos cada una
+        const col1 = primeras30.slice(0, 10);
+        const col2 = primeras30.slice(10, 20);
+        const col3 = primeras30.slice(20, 30);
+        
+        // Columna 1 (1-10)
+        html += `<div class="col-md-4">`;
+        html += `<ul class="list-unstyled">`;
+        col1.forEach((item, idx) => {
+            html += `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${idx + 1}. ${item}</li>`;
+        });
+        html += `</ul></div>`;
+        
+        // Columna 2 (11-20)
+        html += `<div class="col-md-4">`;
+        html += `<ul class="list-unstyled">`;
+        col2.forEach((item, idx) => {
+            html += `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${11 + idx}. ${item}</li>`;
+        });
+        html += `</ul></div>`;
+        
+        // Columna 3 (21-30)
+        html += `<div class="col-md-4">`;
+        html += `<ul class="list-unstyled">`;
+        col3.forEach((item, idx) => {
+            html += `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${21 + idx}. ${item}</li>`;
+        });
+        html += `</ul></div>`;
+        
+        html += `</div>`;
+        html += `<div class="text-center mt-4"><button id="btnVerMas" class="btn-ver-mas"><i class="bi bi-arrow-down-circle"></i> Ver más (${todasLasCosas.length - 30} restantes)</button></div>`;
+        
     } else {
-        html += `<div class="text-center mt-3 fst-italic text-muted">🐹 100 cosas que hacen a Rataudiel único 🐹</div>`;
+        // Modo expandido: mostrar las 100 cosas en columnas 1-33, 34-66, 67-100
+        const col1 = todasLasCosas.slice(0, 33);
+        const col2 = todasLasCosas.slice(33, 66);
+        const col3 = todasLasCosas.slice(66, 100);
+        
+        // Columna 1 (1-33)
+        html += `<div class="col-md-4">`;
+        html += `<ul class="list-unstyled">`;
+        col1.forEach((item, idx) => {
+            html += `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${idx + 1}. ${item}</li>`;
+        });
+        html += `</ul></div>`;
+        
+        // Columna 2 (34-66)
+        html += `<div class="col-md-4">`;
+        html += `<ul class="list-unstyled">`;
+        col2.forEach((item, idx) => {
+            html += `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${34 + idx}. ${item}</li>`;
+        });
+        html += `</ul></div>`;
+        
+        // Columna 3 (67-100)
+        html += `<div class="col-md-4">`;
+        html += `<ul class="list-unstyled">`;
+        col3.forEach((item, idx) => {
+            html += `<li><i class="bi bi-check-circle-fill" style="color: var(--color-detalle);"></i> ${67 + idx}. ${item}</li>`;
+        });
+        html += `</ul></div>`;
+        
+        html += `</div>`;
+        html += `<div class="text-center mt-4"><button id="btnVerMenos" class="btn-ver-mas"><i class="bi bi-arrow-up-circle"></i> Ver menos</button></div>`;
+        html += `<div class="text-center mt-2 fst-italic text-muted">🐹 100 cosas que hacen a Rataudiel único 🐹</div>`;
     }
     
     container.innerHTML = html;
     
-    const btnLeerMas = document.getElementById('btnLeerMas');
-    if (btnLeerMas) {
-        btnLeerMas.addEventListener('click', () => {
-            mostrarCosas(cosasReales.length);
+    // Evento "Ver más"
+    const btnVerMas = document.getElementById('btnVerMas');
+    if (btnVerMas) {
+        btnVerMas.addEventListener('click', () => {
+            cosasExpandidas = true;
+            mostrarCosas();
+            window.scrollTo({ top: document.getElementById('100cosas').offsetTop - 80, behavior: 'smooth' });
+        });
+    }
+    
+    // Evento "Ver menos"
+    const btnVerMenos = document.getElementById('btnVerMenos');
+    if (btnVerMenos) {
+        btnVerMenos.addEventListener('click', () => {
+            cosasExpandidas = false;
+            mostrarCosas();
             window.scrollTo({ top: document.getElementById('100cosas').offsetTop - 80, behavior: 'smooth' });
         });
     }
@@ -251,11 +319,10 @@ function mostrarCosas(limit) {
 
 // ========== INICIALIZACIÓN ==========
 window.addEventListener('load', () => {
-    mostrarCosas(30);
+    mostrarCosas();
     calcularDiasAmistad();
     mostrarDatoRandom();
     
-    // Cambiar dato random cada 30 segundos
     setInterval(mostrarDatoRandom, 30000);
     
     const modal = new bootstrap.Modal(document.getElementById('modalEntrada'));
