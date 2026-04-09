@@ -124,12 +124,12 @@ document.getElementById('easterEgg')?.addEventListener('click', () => {
 const form = document.getElementById('formWhatsApp');
 const successDiv = document.getElementById('mensajeExito');
 // 📱 REEMPLAZAR: poner el número de WhatsApp de Rataudiel o el tuyo
-const numeroTelefono = "TU_NUMERO_AQUI";
+const numeroTelefono = "+50360015036";
 form?.addEventListener('submit', (event) => {
     event.preventDefault();
     const nombre = document.getElementById('nombre').value;
     const mensaje = document.getElementById('mensaje').value;
-    const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Rataudiel*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
+    const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Esmeralda*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
     successDiv.classList.remove('d-none');
     setTimeout(() => { 
         window.open(url, '_blank'); 
