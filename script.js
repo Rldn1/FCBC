@@ -80,7 +80,7 @@ const frasesFooter = [
     '"De la U a la vida, siempre cómplices."',
     '"El introvertido que me adoptó."',
     '"Contigo los frappes saben mejor."',
-    '"Buenísimo, creo."'
+    '"Buenísimo."'
 ];
 
 const btnFraseFooter = document.getElementById('btnFraseFooter');
@@ -96,7 +96,7 @@ if (btnFraseFooter) {
 const easterEggFooter = document.getElementById('easterEggFooter');
 if (easterEggFooter) {
     easterEggFooter.addEventListener('click', function() {
-        alert('🐹 ¡Hola! Gracias por visitar esta página. Rataudiel es un amigo increíble. Cuídalo mucho. 💙');
+        alert('🐁 Rataudiel es un amigo increíble. Por favor, sea mi amigo por más tiempo. 💙');
         canvasConfetti({ particleCount: 120, spread: 80, origin: { y: 0.8 } });
     });
 }
@@ -110,7 +110,7 @@ if (form) {
         event.preventDefault();
         const nombre = document.getElementById('nombre').value;
         const mensaje = document.getElementById('mensaje').value;
-        const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Rataudiel*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
+        const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Esmeralda*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
         successDiv.classList.remove('d-none');
         setTimeout(() => { 
             window.open(url, '_blank'); 
@@ -190,14 +190,13 @@ function mostrarDatoRandom() {
 const todasLasCosas = [
     "Su color favorito es el azul profundo",
     "Escucha música a diario",
-    "Su película favorita es Avatar (los Navi)",
+    "Su película favorita es Avatar",
     "Juega Minecraft",
     "Le encanta la comida china",
     "Hace frappes casi todos los días",
     "Su personaje masculino favorito: Yami (Black Clover)",
     "Su personaje femenino favorito: Katara (Avatar)",
-    "Su frase típica: 'Buenísimo, creo'",
-    "Me ayudó con un examen sin que se lo pidiera",
+    "Su frase típica: 'Buenísimo'",
     "Es católico y muy dedicado a su fe",
     "Estudiamos juntos Ing. en Sistemas",
     "Estamos en el mismo voluntariado",
