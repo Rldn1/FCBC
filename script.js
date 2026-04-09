@@ -290,7 +290,7 @@ function mostrarCosas() {
         
         html += `</div>`;
         html += `<div class="text-center mt-4"><button id="btnVerMenos" class="btn-ver-mas"><i class="bi bi-arrow-up-circle"></i> Ver menos</button></div>`;
-        html += `<div class="text-center mt-2 fst-italic text-muted">🐹 100 cosas que hacen a Rataudiel único 🐹</div>`;
+        html += `<div class="text-center mt-2 fst-italic text-muted">100 cosas que hacen a Rataudiel único 🐁</div>`;
     }
     
     container.innerHTML = html;
