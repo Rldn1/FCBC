@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Feliz Cumpleaños — Hamster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- MODAL ENTRADA -->
+<div class="modal-backdrop" id="modalEntrada">
+  <div class="modal-box">
+    <div class="icon">✦</div>
+    <h4>¿Portal de felicidad?</h4>
+    <p class="quote">"La amistad es el software del alma que no necesita actualizaciones para seguir funcionando."</p>
+    <p>Sin más que decir, bienvenido...</p>
+    <button class="btn-enter" id="btnCerrarModal">Seguir</button>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a href="#inicio" class="brand"><span class="brand-dot"></span>Hamster</a>
+  <button class="nav-toggle" id="navToggle">☰</button>
+  <div class="nav-links" id="navLinks">
+    <span class="nav-pill" id="navPill"></span>
+    <a href="#inicio">Inicio</a>
+    <a href="#galeria">Galería</a>
+    <a href="#frases">Frases</a>
+    <a href="#mundo">Su mundo</a>
+    <a href="#perfil">Perfil</a>
+    <a href="#100cosas">100</a>
+    <a href="#comentarios">Mensajes</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero" id="inicio">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <h1 id="tituloDinamico"></h1>
+      <p class="lead">Un año más, más aventuras, más café y más risas.</p>
+    </div>
+    <div class="hero-photo"><img src="img/ft5.jfif" alt="Hamster"></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- CARRUSEL -->
+  <section>
+    <div class="section-head">
+      <div class="section-eyebrow">Momentos</div>
+      <h2>Juntos, en distintas escenas</h2>
+    </div>
+    <div class="carousel">
+      <div class="car-track" id="carTrack">
+        <div class="car-slide"><img src="img/ft1.jfif" alt="Momento 1"><div class="car-cap">Día de estudio</div></div>
+        <div class="car-slide"><img src="img/ft2.jfif" alt="Momento 2"><div class="car-cap">Otro más</div></div>
+        <div class="car-slide"><img src="img/ft14.jfif" alt="Momento 3"><div class="car-cap">Uno más</div></div>
+        <div class="car-slide"><img src="img/ft13.jfif" alt="Momento 4"><div class="car-cap">Chat importante</div></div>
+      </div>
+      <button class="car-btn car-prev" id="carPrev">‹</button>
+      <button class="car-btn car-next" id="carNext">›</button>
+    </div>
+    <div class="car-dots" id="carDots"></div>
+  </section>
+
+  <!-- GALERIA -->
+  <section id="galeria">
+    <div class="section-head">
+      <div class="section-eyebrow">Galería</div>
+      <h2>Tú, en tu esencia</h2>
+    </div>
+    <div class="grid-4">
+      <div class="glass gal-item"><img src="img/ft7.jfif"><p>El de las motos</p></div>
+      <div class="glass gal-item"><img src="img/ft6.jfif"><p>¿En la trabajación?</p></div>
+      <div class="glass gal-item"><img src="img/ft9.jfif"><p>El envía audios</p></div>
+      <div class="glass gal-item"><img src="img/ft10.jfif"><p>El random</p></div>
+    </div>
+  </section>
+
+  <!-- FRASES -->
+  <section id="frases">
+    <div class="section-head">
+      <div class="section-eyebrow">Frases</div>
+      <h2>Lo que se queda</h2>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h3>"Juela, mi niña, bien que sí"</h3><p>Sus frases más épicas, siempre con humor y cariño.</p><small>Clásico de él</small></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h3>Tomar té en el INGO y viajar en bus</h3><p>Un recuerdo bonito que tenemos: esas tardes tranquilas y la salida pendiente que aún nos espera.</p><small>Ese día en el Dollar City también</small></div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-body"><h3>Compañeros en el instituto</h3><p>Educación media, locuras, estudios y ahora mejores amigos. Aunque no hablemos por días, siempre está ahí.</p><small>2021 — presente</small></div>
+    </div>
+    <div class="grid-2" style="margin-top:30px;">
+      <div class="glass frase-card"><img src="img/ft17.jpg"><p>Siempre</p></div>
+      <div class="glass frase-card"><img src="img/ft18.jpg"><p>Hoy, mañana y siempre</p></div>
+    </div>
+  </section>
+
+  <!-- MUNDO -->
+  <section id="mundo">
+    <div class="section-head">
+      <div class="section-eyebrow">Su mundo</div>
+      <h2>El universo de Hamster</h2>
+    </div>
+    <div class="grid-2">
+      <div class="glass serie-card"><img src="img/ft16.jfif"><p class="t">Peaky Blinders</p><p class="s">Personaje favorito: Tommy Shelby</p></div>
+      <div class="glass serie-card"><img src="img/ft15.jpg"><p class="t">Dragon Ball Z</p><p class="s">Personaje favorito: Supremo Kaiosama</p></div>
+    </div>
+    <div class="glass song-card" style="margin-top:20px;">
+      <div class="song-note">♪</div>
+      <h3>Su canción favorita</h3>
+      <p>"Dónde están" — la que no falta en su playlist</p>
+    </div>
+    <div class="glass passion-grid" style="margin-top:20px;">
+      <div class="passion"><div class="e">🏍️</div><p>Andar en moto</p></div>
+      <div class="passion"><div class="e">🎧</div><p>Escuchar música</p></div>
+      <div class="passion"><div class="e">☕</div><p>Tomar café</p></div>
+      <div class="passion"><div class="e">🎲</div><p>Juegos de mesa</p></div>
+    </div>
+  </section>
+
+  <!-- PERFIL -->
+  <section id="perfil">
+    <div class="section-head">
+      <div class="section-eyebrow">Perfil</div>
+      <h2>Quién es Hamster</h2>
+    </div>
+    <div class="glass profile">
+      <div>
+        <h3>Datos rápidos</h3>
+        <ul>
+          <li><b>Edad:</b> 21 años</li>
+          <li><b>Estudios:</b> Educación media (se fue por la trabajación)</li>
+          <li><b>Pasión:</b> Andar en moto</li>
+          <li><b>Bebida fav:</b> Café</li>
+          <li><b>Comida fav:</b> Pastas, arroz negrito</li>
+          <li><b>Color fav:</b> Tonos de celeste al azul</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Lo que más valoro de él 💜</h3>
+        <p>Es una persona increíble: generoso, gracioso, ocurrente, siempre dispuesto a ayudar. Me apoyó en momentos difíciles, me hizo reír y también me motivó. Aunque a veces no hablamos por días, cuando lo hacemos es como si el tiempo no hubiera pasado.</p>
+        <p class="quote">"Gracias por estar siempre, Hamster 🐹"</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 100 COSAS -->
+  <section id="100cosas">
+    <div class="section-head">
+      <div class="section-eyebrow">Lista</div>
+      <h2>100 cosas sobre Hamster</h2>
+    </div>
+    <div class="glass things">
+      <p class="things-lead">Pequeñas cosas que lo hacen único</p>
+      <div id="contenedor100Cosas"></div>
+    </div>
+  </section>
+
+  <!-- WHATSAPP -->
+  <section id="comentarios">
+    <div class="section-head">
+      <div class="section-eyebrow">Mensaje</div>
+      <h2>¿Quieres dejarme un mensaje?</h2>
+    </div>
+    <div class="glass form-card">
+      <div style="font-size:2rem;">💬</div>
+      <h3>Hazlo desde acá, siempre llegará a mí</h3>
+      <form id="formWhatsApp">
+        <input type="text" id="nombre" class="field" placeholder="Tu nombre" required>
+        <textarea id="mensaje" class="field" rows="3" placeholder="Escribe tu mensaje..." required></textarea>
+        <button type="submit" class="btn-send">Enviar por WhatsApp</button>
+      </form>
+      <div id="mensajeExito" class="alert-ok">¡Gracias! Serás redirigido a WhatsApp</div>
+    </div>
+
+    <div class="qr-row" style="margin-top:20px;">
+      <div class="glass qr-card">
+        <div style="font-size:1.6rem;">▦</div>
+        <h5>Escanea</h5>
+        <img src="img/qr.jpg" alt="QR">
+      </div>
+      <div class="glass qr-card">
+        <div style="font-size:1.6rem;">✧</div>
+        <h5>Sorpresa</h5>
+        <div id="imagenOculta" style="display:none; margin-top:12px;">
+          <img src="img/ft19.jpg" alt="Sorpresa" style="border-radius:12px;">
+        </div>
+        <a href="#" id="enlaceImagen" class="link-btn">Haz click aquí</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="foot-row">
+      <div class="foot-days"><b id="contadorDias">0</b> días de amistad <span style="color:var(--muted); font-size:.85rem;">· desde 2021</span></div>
+      <div class="foot-phrase">
+        <span id="fraseRandomFooter">"La amistad es como el café: calienta el alma."</span>
+        <button id="btnFraseFooter" class="foot-btn">Otra frase</button>
+      </div>
+    </div>
+    <div class="foot-fact">🐹 <span id="datoRandomHamster">Cargando dato...</span> 🐹</div>
+    <div class="foot-bottom">
+      © 2026 · Hecho con 💙 por <b>Tu MejorA</b> · Para <b>Hamster</b> 🐹
+      <span class="egg" id="easterEggFooter">Mensaje secreto</span>
+    </div>
+  </div>
+</footer>
+
+<!-- FLOATING -->
+<div class="floaters">
+  <button class="fbtn" id="modoBtn">☀️</button>
+  <button class="fbtn" id="btnVideoModal">🎵</button>
+</div>
+
+<!-- MODAL VIDEO -->
+<div class="modal-backdrop modal-video" id="modalVideo">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" id="closeVideoModal">✕</button>
+    <h4 style="margin-bottom:14px;">🎂 Canción de cumpleaños</h4>
+    <div class="video-frame"><iframe src="https://www.youtube.com/embed/uerRSQBLBRE" title="Feliz Cumpleaños" allowfullscreen></iframe></div>
+    <p style="margin-top:10px; color:var(--muted); font-size:.85rem;">🎧🐹</p>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
