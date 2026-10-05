@@ -1,5 +1,5 @@
 // ---- Título con efecto de escritura ----
-const textoCompleto = "Feliz cumpleaños, Hamster";
+const textoCompleto = "Feliz cumpleaños, Rataudiel";
 const tituloEl = document.getElementById('tituloDinamico');
 function escribir(i,cb){
   if(i<=textoCompleto.length){ tituloEl.innerHTML = textoCompleto.slice(0,i)+'<span style="opacity:.6">|</span>'; setTimeout(()=>escribir(i+1,cb),75); }
@@ -26,7 +26,9 @@ document.getElementById('btnCerrarModal').addEventListener('click',()=>modalEntr
 // ---- Tema oscuro / claro (por defecto oscuro) ----
 const root = document.documentElement;
 const modoBtn = document.getElementById('modoBtn');
-function setTheme(t){ root.setAttribute('data-theme',t); modoBtn.textContent = t==='dark' ? '☀️' : '🌙'; }
+const SUN_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>';
+const MOON_ICON = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 14.3A8.3 8.3 0 1 1 9.7 4a6.6 6.6 0 0 0 10.3 10.3Z"/></svg>';
+function setTheme(t){ root.setAttribute('data-theme',t); document.getElementById('modoIcon').innerHTML = t==='dark' ? SUN_ICON : MOON_ICON; }
 setTheme('dark');
 modoBtn.addEventListener('click', ()=> setTheme(root.getAttribute('data-theme')==='dark' ? 'light' : 'dark'));
 
@@ -92,7 +94,7 @@ const frases = [
   '"La amistad es como el café: calienta el alma."',
   '"Eres de esas personas que hacen que el mundo sea mejor."',
   '"Gracias por estar siempre, incluso sin hablar por días."',
-  '"Un 🐹, un amigo, un hermano."',
+  '"Un 🐀, un amigo, un hermano."',
   '"El extrovertido que me adoptó."',
   '"Contigo el té sabe mejor."'
 ];
@@ -103,10 +105,13 @@ document.getElementById('btnFraseFooter').addEventListener('click', ()=>{
 });
 
 // ---- Easter egg ----
+const modalSecreto = document.getElementById('modalSecreto');
 document.getElementById('easterEggFooter').addEventListener('click', ()=>{
-  alert('🐹 Hamster es un amigo increíble. Por favor, permanece más tiempo como mi amigo. 💙');
+  modalSecreto.classList.add('open');
   confetti({particleCount:120, spread:80, origin:{y:0.8}});
 });
+document.getElementById('btnCerrarSecreto').addEventListener('click', ()=>modalSecreto.classList.remove('open'));
+modalSecreto.addEventListener('click', e=>{ if(e.target===modalSecreto) modalSecreto.classList.remove('open'); });
 
 // ---- WhatsApp ----
 const form = document.getElementById('formWhatsApp');
@@ -116,7 +121,7 @@ form.addEventListener('submit', e=>{
   e.preventDefault();
   const nombre = document.getElementById('nombre').value;
   const mensaje = document.getElementById('mensaje').value;
-  const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Hamster*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
+  const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Rataudiel*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
   successDiv.style.display='block';
   setTimeout(()=>{ window.open(url,'_blank'); form.reset(); setTimeout(()=>successDiv.style.display='none',5000); },1000);
 });
@@ -140,7 +145,7 @@ modalVideo.addEventListener('click', e=>{ if(e.target===modalVideo) modalVideo.c
 
 // ---- Contador de días ----
 function calcularDias(){
-  const inicio = new Date(2021,0,1); const hoy = new Date();
+  const inicio = new Date(2022,0,1); const hoy = new Date();
   const dias = Math.ceil(Math.abs(hoy-inicio)/(1000*60*60*24));
   document.getElementById('contadorDias').textContent = dias;
 }
@@ -148,12 +153,11 @@ calcularDias();
 
 // ---- Dato random ----
 const datos = [
-  "Le gustan los guineos con cáscara","Hace café casi a diario","Su pasión es andar en moto",
-  "Escucha música todo el tiempo","Su comida favorita son las pastas","Le encantan los juegos de mesa",
-  "Envía audios larguísimos","No duerme mucho, pero siempre rinde","Le gusta Peaky Blinders y Dragon Ball",
-  "Le digo 'baka' pero con cariño","Fue mi compañero en educación media","Es extrovertido y me anima siempre",
-  "Recuerdo: el día en Dollar City","Salida pendiente","Té en el INGO con él","Su frase: 'Juela, mi niña'",
-  "¿Rey de los juegos de mesa?","Prefiere audios antes que textos"
+  "Le encantan los frappés, casi todos los días se hace uno","Es fan de Avatar y de Black Clover",
+  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice 'Buenísimo, creo' para todo",
+  "Todavía no puede instalar Laravel","Usa Illustrator como todo un profesional","Escucha Spotify 24/7",
+  "Nunca falta a un voluntariado","Le dicen 'la rata' con mucho cariño","Come pupusas con salsa negra y medio repollo",
+  "Es alérgico","Es el traductor de inglés del grupo","Amigos desde 2022"
 ];
 function mostrarDato(){
   const el = document.getElementById('datoRandomHamster');
@@ -162,46 +166,37 @@ function mostrarDato(){
 }
 mostrarDato(); setInterval(mostrarDato, 5000);
 
-// ---- 100 cosas ----
+// ---- 101 cosas ----
 const todasLasCosas = [
-"No creía que le hablaría (excepto para trabajos)","Se veía 'sabiondo' en informática","Es una buena persona","Gracioso",
-"Mentiroso (pero sin malicia)","Generoso","Buen amigo","Algo baka (tonto)","Alguien con quien hablar con profundidad",
-"Alguien que apoya","Trata de entender a los demás","Sabe que la vida es difícil y por eso es empático",
-"El extrovertido que me hizo saltarme clases","Quien me ayudó cuando pasaba malos momentos",
-"Alguien que puede escuchar lo mismo una y otra vez","El 🐹 que me agrada bastante","El enamorado del salón",
-"Si no fuera tan enamorado, sería un buen partido","Anduvo con alguien que no me caía ni bien ni mal",
-"El que le dicen 'no hagas esto' y es lo primero que hace","Quien está haciendo que en vez de estudiar, yo escriba esto",
-"El que se la pasa en el trabajo todo el día","Quien se preocupa por los demás","Alguien que le gusta la equidad e igualdad",
-"Quien estuvo a punto de grandes errores pero no los cometió","Esa persona que fue al centro social esa vez",
-"El que llegaba tarde","Quien se quejaba del profe","El vago del salón (pero inteligente)","Al que le gusta el café",
-"El come galletas","El come guineos con cáscara","El que tiene dientitos","Quien a veces duda","El indeciso",
-"El que no se calla","Quien le daba mil vueltas al instituto","Alguien que andaba como cien cosas en la mochila",
-"El que me dijo 'usted' casi un año","El primero que hizo que comiera del mismo desayuno con alguien especial",
-"El necio","El del teléfono Lenovo","El inventor","La primera persona en hacer que escriba 100 cosas",
-"El de los juegos de mesa","El baka que jugó bien feo solo por la novia","El que tenía como 100 mil fotos de la ex",
-"El que dicen que es bien baka","El que no ve anime","No ve K-dramas","El pelisplus","El que se enreda con lo que escribe",
-"El de los audios","El de los fondos con colores bonitos","El que dice 'eso no es así'","El que dice 'querés'",
-"El que iba de primero en la lista","Quien lava los pantalones una vez a la semana","El adventista",
-"El que le dice 'tito' a los demás","El que andaba poniendo fondos animados en las laptops","El exagerado",
-"Quien escribe la 'a' como si fuera 'q'","El que pasó el examen de la UES aún siendo flojo",
-"El que responde al año pero es porque trabaja","El que casi no iba a clases","El de las palomitas medias cocidas o quemadas",
-"El de los chocolates","El que escribe abreviado por mensaje","El que envía reels por Instagram","El que no duerme",
-"El que sabe de programación","El novio de Emerson (chiste interno)","El amigo de Ángel","El que le decía mentiras al profe",
-"El que me hizo pensar bastante para escribir 100 cosas","Quien no sé si leerá todo esto",
-"El que me pidió una opinión general y no la di","Alguien a quien puedo llamar 'mejor amigo'","Quien no juzga",
-"Quien molesta tanto","El que todo quiere saber","El metido pues","El que tiene como 100 novias (exageración)",
-"El que me copió en una respuesta del examen y le salió mala","Quien me ayudó con varias cosas en el instituto",
-"Al que no le gusta el fútbol","Quien no creía que escribiría 100 cosas","El que puede decirme 'su majestad'",
-"Al que los papás no lo quieren (broma)","Al que nada lo ofende","Alguien que vale la pena llamar 'amigo'",
-"Quien siempre ve mis estados","El que sale con cosas random","Alguien que sabe que puede mejorar para ser mejor persona",
-"Un pervertido (mente sucia)","El chef","El de 'vamos al punto'","El dramático",
-"El amigo que me dejó la educación media y, aunque no hablemos mucho, es bueno seguir en contacto y saber que está ahí para mí y viceversa."
+"La rata","El chico que era introvertido","El talentoso","El de muchas capacidades y habilidades","El bondadoso",
+"Servicial","Solidario","Medio perfeccionista","El de los tres leches","El alérgico",
+"La Rata Colocha","Mi dúo en estudio","Mi amigo favorito","El decidido","Fan de Avatar",
+"Al que le gusta la comida china","El de los frappé","El que nunca duerme","El alto","Termómetro",
+"Mi compañero de la universidad","Mi compañero del programa","El de los voluntariados","El que tiene como mil conocidos","El busca oportunidades académicas",
+"Al que le gusta el color azul","El que le gusta el diseño","El juega Minecraft","El comprometido con la Iglesia","El de los retiros",
+"El creativo","El amigo que apoya en todo","El comparte comida","El confiable","El que sabe hacer de todo",
+"El traductor de inglés","El empático","Alguien con quien no creí que seríamos amigos","Con quién se puede hablar de cualquier tema","Alguien a quien le puedo hablar de lo mismo una y otra vez",
+"Quién se preocupa por los demás","Quién a veces duda","El del botiquín","Quién anda mil cosas en la mochila","El insistente",
+"El que está haciendo que piense bastante para escribir 100 cosas","Al que vale la pena confiar en él ciegamente","El dramático","El chef (según él)","Mi querido amigo",
+"El \"vamos a comprar\"","Quién ve mis estados","Al que no le gusta el fútbol","El aparentemente tranquilo","El que todo quiere saber",
+"La mascota del grupo","El envía Reels","El de los apodos con \"rata\"","Al que no le gustan los k-dramas","El que me sigue llamando \"usted\"",
+"Mi compañero para todo lo académico","El \"🐀\" que me agrada tanto","Quién me ha ayudado tanto","El de las golosinas","El que le gusta ayudar a los demás",
+"La rata blanca","El de las fotos","El que come en clases","El que se enferma a cada rato","El que responde un día después",
+"Alguien increíble","El resiliente","El de las tostadas","El de los buenos gestos (acciones)","El responsable",
+"Al que tengo su chat fijado","El de las actividades extracurriculares","El que vive en medio de la nada","El que espera bus durante 3 horas","El de Illustrator",
+"El que trata de entender a los demás","Mi ratiamigo (rata + amigo)","Al que no le gusta decir su fecha de cumpleaños","El que quiere ir a todos lados","El de los stickers",
+"El de los videos con IA","El inventor","El ocupado","El que no puede instalar Laravel","El que incluye a todos en las cosas",
+"El usa Spotify 24/7","Al que no hacen administrador en los grupos","El mejor compañero que he tenido","El bromista del grupo","El come pupusas con salsa negra y medio recipiente de repollo",
+"El de los \"jssjskdjsjsjsjdjs\"","Al que le encanta el arroz cantonés","Quien no se da por vencido","La rata del salón",
+"Mi querido, estimado, irremplazable, extraordinario, fantástico, genial, generoso, servicial e increíble compañero y amigo",
+"el Rataudiel 🐀"
 ];
 function mostrarCosas(limit){
   const cont = document.getElementById('contenedor100Cosas');
-  const cosas = todasLasCosas.slice(0,limit);
-  const cols = [[],[],[]];
-  cosas.forEach((c,i)=>cols[i%3].push({n:i+1,t:c}));
+  const total = todasLasCosas.length;
+  const cosas = todasLasCosas.slice(0,limit).map((c,i)=>({n:i+1,t:c}));
+  const size = Math.floor(limit/3);
+  const cols = [ cosas.slice(0,size), cosas.slice(size,size*2), cosas.slice(size*2) ];
   let html = '<div class="things-cols">';
   cols.forEach(col=>{
     html += '<ul>';
@@ -209,10 +204,10 @@ function mostrarCosas(limit){
     html += '</ul>';
   });
   html += '</div>';
-  if(limit===30){ html += `<button class="btn-more" id="btnVerMas">Ver más (70 restantes)</button>`; }
+  if(limit < total){ html += `<button class="btn-more" id="btnVerMas">Ver más (${total-limit} restantes)</button>`; }
   else { html += `<button class="btn-more" id="btnVerMenos">Ver menos (volver a 30)</button>`; }
   cont.innerHTML = html;
-  const bm = document.getElementById('btnVerMas'); if(bm) bm.addEventListener('click', ()=>mostrarCosas(100));
+  const bm = document.getElementById('btnVerMas'); if(bm) bm.addEventListener('click', ()=>mostrarCosas(total));
   const bl = document.getElementById('btnVerMenos'); if(bl) bl.addEventListener('click', ()=>mostrarCosas(30));
 }
 mostrarCosas(30);

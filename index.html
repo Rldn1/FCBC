@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Feliz Cumpleaños — Hamster</title>
+<title>Feliz Cumpleaños — Rataudiel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,17 +14,19 @@
 <!-- MODAL ENTRADA -->
 <div class="modal-backdrop" id="modalEntrada">
   <div class="modal-box">
-    <div class="icon">✦</div>
+    <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2c.6 3.8 2.2 6.4 6 7-3.8.6-5.4 2.2-6 6-.6-3.8-2.2-5.4-6-6 3.8-.6 5.4-2.2 6-7Z"/></svg></div>
     <h4>¿Portal de felicidad?</h4>
     <p class="quote">"La amistad es el software del alma que no necesita actualizaciones para seguir funcionando."</p>
-    <p>Sin más que decir, bienvenido...</p>
+    <p>Sin más que decir, bienvenido, Rataudiel
+      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
+    </p>
     <button class="btn-enter" id="btnCerrarModal">Seguir</button>
   </div>
 </div>
 
 <!-- NAV -->
 <nav class="nav">
-  <a href="#inicio" class="brand"><span class="brand-dot"></span>Hamster</a>
+  <a href="#inicio" class="brand"><span class="brand-dot"></span>Rataudiel</a>
   <button class="nav-toggle" id="navToggle">☰</button>
   <div class="nav-links" id="navLinks">
     <span class="nav-pill" id="navPill"></span>
@@ -45,7 +47,7 @@
       <h1 id="tituloDinamico"></h1>
       <p class="lead">Un año más, más aventuras, más café y más risas.</p>
     </div>
-    <div class="hero-photo"><img src="img/ft5.jfif" alt="Hamster"></div>
+    <div class="hero-photo-ring"><div class="hero-photo"><img src="img/ft5.jfif" alt="Rataudiel"></div></div>
   </div>
 </div>
 
@@ -77,10 +79,10 @@
       <h2>Tú, en tu esencia</h2>
     </div>
     <div class="grid-4">
-      <div class="glass gal-item"><img src="img/ft7.jfif"><p>El de las motos</p></div>
-      <div class="glass gal-item"><img src="img/ft6.jfif"><p>¿En la trabajación?</p></div>
-      <div class="glass gal-item"><img src="img/ft9.jfif"><p>El envía audios</p></div>
-      <div class="glass gal-item"><img src="img/ft10.jfif"><p>El random</p></div>
+      <div class="glass gal-item"><img src="img/ft7.jfif"><p>El de Illustrator</p></div>
+      <div class="glass gal-item"><img src="img/ft6.jfif"><p>El que no puede instalar Laravel</p></div>
+      <div class="glass gal-item"><img src="img/ft9.jfif"><p>El envía Reels</p></div>
+      <div class="glass gal-item"><img src="img/ft10.jfif"><p>La rata del salón</p></div>
     </div>
   </section>
 
@@ -92,19 +94,23 @@
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-body"><h3>"Juela, mi niña, bien que sí"</h3><p>Sus frases más épicas, siempre con humor y cariño.</p><small>Clásico de él</small></div>
+      <div class="tl-body"><h3>"Buenísimo, creo"</h3><p>Su frase de cada día, para absolutamente todo.</p><small>Clásico de él</small></div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-body"><h3>Tomar té en el INGO y viajar en bus</h3><p>Un recuerdo bonito que tenemos: esas tardes tranquilas y la salida pendiente que aún nos espera.</p><small>Ese día en el Dollar City también</small></div>
+      <div class="tl-body"><h3>Esa ayuda que nunca pedí</h3><p>La primera vez que me ayudó con una tarea (fue un examen): no se lo pedí, pero era justo lo que quería pedir y me daba pena, porque no me gustaba pedir ayuda.</p><small>Un recuerdo bonito</small></div>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-body"><h3>Compañeros en el instituto</h3><p>Educación media, locuras, estudios y ahora mejores amigos. Aunque no hablemos por días, siempre está ahí.</p><small>2021 — presente</small></div>
+      <div class="tl-body"><h3>Amigos desde 2022</h3><p>Compañeros de universidad y del programa, y ahora mejores amigos. Aunque no hablemos por días, siempre está ahí.</p><small>2022 — presente</small></div>
     </div>
     <div class="grid-2" style="margin-top:30px;">
-      <div class="glass frase-card"><img src="img/ft17.jpg"><p>Siempre</p></div>
-      <div class="glass frase-card"><img src="img/ft18.jpg"><p>Hoy, mañana y siempre</p></div>
+      <div class="glass frase-card" style="padding:26px;">
+        <p style="font-style:italic; color:var(--text); font-size:1.02rem; margin:0;">"Como una buena variable, esta amistad nunca cambia de valor — pase lo que pase, sigue siendo la misma."</p>
+      </div>
+      <div class="glass frase-card" style="padding:26px;">
+        <p style="font-style:italic; color:var(--text); font-size:1.02rem; margin:0;">"No hace falta hacer deploy todos los días para que una amistad siga corriendo en producción."</p>
+      </div>
     </div>
   </section>
 
@@ -112,22 +118,24 @@
   <section id="mundo">
     <div class="section-head">
       <div class="section-eyebrow">Su mundo</div>
-      <h2>El universo de Hamster</h2>
+      <h2>El universo de Rataudiel</h2>
     </div>
     <div class="grid-2">
-      <div class="glass serie-card"><img src="img/ft16.jfif"><p class="t">Peaky Blinders</p><p class="s">Personaje favorito: Tommy Shelby</p></div>
-      <div class="glass serie-card"><img src="img/ft15.jpg"><p class="t">Dragon Ball Z</p><p class="s">Personaje favorito: Supremo Kaiosama</p></div>
+      <div class="glass serie-card"><img src="img/ft16.jfif"><p class="t">Avatar</p><p class="s">Su película favorita · personaje favorito: Katara</p></div>
+      <div class="glass serie-card"><img src="img/ft15.jpg"><p class="t">Black Clover</p><p class="s">Personaje favorito: Yami Sukehiro</p></div>
     </div>
-    <div class="glass song-card" style="margin-top:20px;">
-      <div class="song-note">♪</div>
-      <h3>Su canción favorita</h3>
-      <p>"Dónde están" — la que no falta en su playlist</p>
+    <div class="glass song-card" style="margin-top:20px; padding:22px;">
+      <h3 style="margin-bottom:12px;">Su canción favorita</h3>
+      <div class="video-frame">
+        <iframe src="https://www.youtube.com/embed/ozQd4AxOtLI" title="Cry - Cigarettes After Sex" allowfullscreen></iframe>
+      </div>
+      <p style="margin-top:10px;">"Cry" — Cigarettes After Sex</p>
     </div>
     <div class="glass passion-grid" style="margin-top:20px;">
-      <div class="passion"><div class="e">🏍️</div><p>Andar en moto</p></div>
-      <div class="passion"><div class="e">🎧</div><p>Escuchar música</p></div>
-      <div class="passion"><div class="e">☕</div><p>Tomar café</p></div>
-      <div class="passion"><div class="e">🎲</div><p>Juegos de mesa</p></div>
+      <div class="passion"><div class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></div><p>Escuchar música</p></div>
+      <div class="passion"><div class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 2.5 21 7.5v9L12 21.5 3 16.5v-9L12 2.5Z"/><path d="M3 7.5 12 12.5 21 7.5M12 12.5v9"/></svg></div><p>Minecraft</p></div>
+      <div class="passion"><div class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9h11l-1 9.5a2 2 0 0 1-2 1.8H9a2 2 0 0 1-2-1.8L6 9Z"/><path d="M17 10.5h1.5a2.3 2.3 0 0 1 0 4.6H17"/></svg></div><p>Frappés casi a diario</p></div>
+      <div class="passion"><div class="e"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 11h17a8.5 7 0 0 1-17 0Z"/><path d="M4.5 11a7.5 6 0 0 1 15 0"/><path d="M15 4.5 19.5 1M17 6l3.5-3"/></svg></div><p>Comida china</p></div>
     </div>
   </section>
 
@@ -135,24 +143,29 @@
   <section id="perfil">
     <div class="section-head">
       <div class="section-eyebrow">Perfil</div>
-      <h2>Quién es Hamster</h2>
+      <h2>Quién es Rataudiel</h2>
     </div>
     <div class="glass profile">
       <div>
         <h3>Datos rápidos</h3>
         <ul>
-          <li><b>Edad:</b> 21 años</li>
-          <li><b>Estudios:</b> Educación media (se fue por la trabajación)</li>
-          <li><b>Pasión:</b> Andar en moto</li>
-          <li><b>Bebida fav:</b> Café</li>
-          <li><b>Comida fav:</b> Pastas, arroz negrito</li>
-          <li><b>Color fav:</b> Tonos de celeste al azul</li>
+          <li><b>Amigos desde:</b> 2022</li>
+          <li><b>Color favorito:</b> Azul</li>
+          <li><b>Pasatiempo favorito:</b> Escuchar música</li>
+          <li><b>Película favorita:</b> Avatar (Na'vi)</li>
+          <li><b>Juego favorito:</b> Minecraft</li>
+          <li><b>Comida favorita:</b> Comida china</li>
+          <li><b>Personaje favorito:</b> Yami (Black Clover) y Katara (Avatar)</li>
+          <li><b>Su frase de siempre:</b> "Buenísimo, creo"</li>
+          <li><b>Dato random:</b> Le encantan los frappés, tanto que casi todos los días se hace uno</li>
         </ul>
       </div>
       <div>
         <h3>Lo que más valoro de él 💜</h3>
-        <p>Es una persona increíble: generoso, gracioso, ocurrente, siempre dispuesto a ayudar. Me apoyó en momentos difíciles, me hizo reír y también me motivó. Aunque a veces no hablamos por días, cuando lo hacemos es como si el tiempo no hubiera pasado.</p>
-        <p class="quote">"Gracias por estar siempre, Hamster 🐹"</p>
+        <p>Es bondadoso, servicial y solidario, el tipo de amigo confiable con quien se puede hablar de cualquier tema. La primera vez que me ayudó con una tarea (fue un examen) ni siquiera se lo pedí — era justo lo que quería pedir, pero me daba pena hacerlo. Aunque no hablemos por días, siempre está ahí.</p>
+        <p class="quote">"Gracias por estar siempre, Rataudiel"
+          <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
+        </p>
       </div>
     </div>
   </section>
@@ -161,7 +174,7 @@
   <section id="100cosas">
     <div class="section-head">
       <div class="section-eyebrow">Lista</div>
-      <h2>100 cosas sobre Hamster</h2>
+      <h2>101 cosas sobre Rataudiel</h2>
     </div>
     <div class="glass things">
       <p class="things-lead">Pequeñas cosas que lo hacen único</p>
@@ -176,7 +189,7 @@
       <h2>¿Quieres dejarme un mensaje?</h2>
     </div>
     <div class="glass form-card">
-      <div style="font-size:2rem;">💬</div>
+      <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4V5Z"/></svg></div>
       <h3>Hazlo desde acá, siempre llegará a mí</h3>
       <form id="formWhatsApp">
         <input type="text" id="nombre" class="field" placeholder="Tu nombre" required>
@@ -188,15 +201,15 @@
 
     <div class="qr-row" style="margin-top:20px;">
       <div class="glass qr-card">
-        <div style="font-size:1.6rem;">▦</div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><rect x="3" y="3" width="6" height="6" rx="1"/><rect x="15" y="3" width="6" height="6" rx="1"/><rect x="3" y="15" width="6" height="6" rx="1"/><path d="M15 15h3M15 19h6M21 15v6"/></svg></div>
         <h5>Escanea</h5>
         <img src="img/qr.jpg" alt="QR">
       </div>
       <div class="glass qr-card">
-        <div style="font-size:1.6rem;">✧</div>
+        <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v7a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-7M2 7h20v5H2zM12 7v13M12 7c-1.5-3-6-4-6 0 0 2 2.5 2 6 0"/><path d="M12 7c1.5-3 6-4 6 0 0 2-2.5 2-6 0"/></svg></div>
         <h5>Sorpresa</h5>
         <div id="imagenOculta" style="display:none; margin-top:12px;">
-          <img src="img/ft19.jpg" alt="Sorpresa" style="border-radius:12px;">
+          <img src="{{IMG_FT19}}" alt="Sorpresa" style="border-radius:12px;">
         </div>
         <a href="#" id="enlaceImagen" class="link-btn">Haz click aquí</a>
       </div>
@@ -208,15 +221,20 @@
 <footer>
   <div class="wrap">
     <div class="foot-row">
-      <div class="foot-days"><b id="contadorDias">0</b> días de amistad <span style="color:var(--muted); font-size:.85rem;">· desde 2021</span></div>
+      <div class="foot-days"><b id="contadorDias">0</b> días de amistad <span style="color:var(--muted); font-size:.85rem;">· desde 2022</span></div>
       <div class="foot-phrase">
         <span id="fraseRandomFooter">"La amistad es como el café: calienta el alma."</span>
         <button id="btnFraseFooter" class="foot-btn">Otra frase</button>
       </div>
     </div>
-    <div class="foot-fact">🐹 <span id="datoRandomHamster">Cargando dato...</span> 🐹</div>
+    <div class="foot-fact">
+      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
+      <span id="datoRandomHamster">Cargando dato...</span>
+      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
+    </div>
     <div class="foot-bottom">
-      © 2026 · Hecho con 💙 por <b>Tu MejorA</b> · Para <b>Hamster</b> 🐹
+      © 2026 · Hecho con 💙 por <b>Tu MejorA</b> · Para <b>Rataudiel</b>
+      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
       <span class="egg" id="easterEggFooter">Mensaje secreto</span>
     </div>
   </div>
@@ -224,17 +242,42 @@
 
 <!-- FLOATING -->
 <div class="floaters">
-  <button class="fbtn" id="modoBtn">☀️</button>
-  <button class="fbtn" id="btnVideoModal">🎵</button>
+  <button class="fbtn" id="modoBtn">
+    <span id="modoIcon">
+      <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg>
+    </span>
+    <span class="tip">Cambiar tema</span>
+  </button>
+  <button class="fbtn" id="btnVideoModal">
+    <span><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg></span>
+    <span class="tip">Su canción favorita</span>
+  </button>
+</div>
+
+<!-- MODAL MENSAJE SECRETO -->
+<div class="modal-backdrop" id="modalSecreto">
+  <div class="modal-box" style="position:relative;">
+    <button class="modal-close" id="closeSecretoModal">✕</button>
+    <div class="icon"><svg viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg></div>
+    <h4>Mensaje secreto</h4>
+    <p class="quote">"Rataudiel es un amigo increíble. Por favor, permanece más tiempo como mi amigo."</p>
+    <button class="btn-enter" id="btnCerrarSecreto">Cerrar</button>
+  </div>
 </div>
 
 <!-- MODAL VIDEO -->
 <div class="modal-backdrop modal-video" id="modalVideo">
   <div class="modal-box" style="position:relative;">
     <button class="modal-close" id="closeVideoModal">✕</button>
-    <h4 style="margin-bottom:14px;">🎂 Canción de cumpleaños</h4>
-    <div class="video-frame"><iframe src="https://www.youtube.com/embed/uerRSQBLBRE" title="Feliz Cumpleaños" allowfullscreen></iframe></div>
-    <p style="margin-top:10px; color:var(--muted); font-size:.85rem;">🎧🐹</p>
+    <h4 style="margin-bottom:14px; display:flex; align-items:center; justify-content:center; gap:8px;">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l11-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="17" cy="16" r="3"/></svg>
+      Su canción favorita
+    </h4>
+    <div class="video-frame"><iframe src="https://www.youtube.com/embed/ozQd4AxOtLI" title="Cry - Cigarettes After Sex" allowfullscreen></iframe></div>
+    <p style="margin-top:10px; color:var(--muted); font-size:.85rem; display:flex; align-items:center; justify-content:center; gap:6px;">
+      "Cry" — Cigarettes After Sex
+      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
+    </p>
   </div>
 </div>
 <script src="script.js"></script>
