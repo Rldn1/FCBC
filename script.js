@@ -1,3 +1,37 @@
+// ---- Autoajuste de la ruta de imágenes ----
+// Prueba img/ y, si no carga, ../img/ y ../../img/ (por si la carpeta img está en un nivel superior)
+(function(){
+  const rutas=['img/','../img/','../../img/'];
+  function arreglar(img){
+    if(img.dataset.cargando==='1') return;
+    const src=img.getAttribute('src')||'';
+    if(!/^(\.\.\/)*img\//.test(src)) return;
+    const archivo=src.replace(/^(\.\.\/)*img\//,'');
+    const i=parseInt(img.dataset.rutaIdx||'0',10)+1;
+    if(i>=rutas.length) return;
+    img.dataset.rutaIdx=i; img.dataset.cargando='1';
+    img.src=rutas[i]+archivo;
+  }
+  document.querySelectorAll('img').forEach(img=>{
+    img.addEventListener('load',()=>{ img.dataset.cargando='0'; });
+    img.addEventListener('error',()=>{ img.dataset.cargando='0'; arreglar(img); });
+    if(img.complete && img.naturalWidth===0) arreglar(img);
+  });
+})();
+
+// ---- Marcos de fotos: mismo tamaño y foto completa sobre fondo difuminado ----
+(function(){
+  const reglas=[['.car-slide > img','wide'],['.gal-item > img','sq'],['.frase-img > img','tall']];
+  reglas.forEach(([sel,cls])=>{
+    document.querySelectorAll(sel).forEach(img=>{
+      const marco=document.createElement('div'); marco.className='fit '+cls;
+      img.parentNode.insertBefore(marco,img); marco.appendChild(img);
+      const poner=()=>marco.style.setProperty('--fit-bg','url("'+(img.currentSrc||img.src)+'")');
+      img.addEventListener('load',poner); if(img.complete) poner();
+    });
+  });
+})();
+
 // ---- Título con efecto de escritura ----
 const textoCompleto = "Feliz cumpleaños, Rataudiel";
 const tituloEl = document.getElementById('tituloDinamico');
@@ -94,9 +128,8 @@ const frases = [
   '"La amistad es como el café: calienta el alma."',
   '"Eres de esas personas que hacen que el mundo sea mejor."',
   '"Gracias por estar siempre, incluso sin hablar por días."',
-  '"Un 🐀, un amigo, un hermano."',
-  '"El extrovertido que me adoptó."',
-  '"Contigo el té sabe mejor."'
+  '"Una rata, un amigo, un hermano."',
+  '"Con usted estudiar es mejor."'
 ];
 document.getElementById('btnFraseFooter').addEventListener('click', ()=>{
   const el = document.getElementById('fraseRandomFooter');
@@ -138,10 +171,49 @@ enlace.addEventListener('click', e=>{
 });
 
 // ---- Modal video ----
+// ---- Reproductores de YouTube (si un video no se puede incrustar, prueba el siguiente) ----
+const VIDEOS = {
+  favorita: ['3XqqkrJENB4','ozQd4AxOtLI','wcbcWcK96cw','lYGZqO4kJko'],               // "Cry" - Cigarettes After Sex
+  cumple:   ['3OsHNlsp3zw','L5hubUENAdI','fCgLQ2_Tzqc','IF_et-FA9ws','uerRSQBLBRE']  // Feliz cumpleaños (ratón cantando y respaldos)
+};
+const players = {};
+let ytListo = false;
+const pendientes = [];
+function enlaceDeRespaldo(elId, videoId){
+  const el = document.getElementById(elId); if(!el || !el.parentElement) return;
+  el.parentElement.innerHTML = '<div class="video-fallback"><p>No se pudo reproducir aquí.</p><a class="link-btn" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+videoId+'">Abrir en YouTube</a></div>';
+}
+function crearReproductor(clave, elId){
+  const ids = VIDEOS[clave]; let i = 0;
+  const hacer = ()=>{
+    const vars = {rel:0, modestbranding:1, playsinline:1};
+    if(location.protocol.indexOf('http')===0) vars.origin = location.origin;
+    players[clave] = new YT.Player(elId, {
+      videoId: ids[0], width:'100%', height:'100%', playerVars: vars,
+      events:{ onError: ()=>{
+        i++;
+        if(i<ids.length) players[clave].loadVideoById(ids[i]);
+        else enlaceDeRespaldo(elId, ids[0]);
+      } }
+    });
+  };
+  if(ytListo) hacer(); else pendientes.push(hacer);
+}
+window.onYouTubeIframeAPIReady = ()=>{ ytListo=true; pendientes.splice(0).forEach(f=>f()); };
+crearReproductor('favorita','playerCancion');
+
+// ---- Modal canción de cumpleaños (botón flotante) ----
 const modalVideo = document.getElementById('modalVideo');
-document.getElementById('btnVideoModal').addEventListener('click', ()=>modalVideo.classList.add('open'));
-document.getElementById('closeVideoModal').addEventListener('click', ()=>modalVideo.classList.remove('open'));
-modalVideo.addEventListener('click', e=>{ if(e.target===modalVideo) modalVideo.classList.remove('open'); });
+function cerrarVideo(){
+  modalVideo.classList.remove('open');
+  if(players.cumple && players.cumple.pauseVideo) players.cumple.pauseVideo();
+}
+document.getElementById('btnVideoModal').addEventListener('click', ()=>{
+  modalVideo.classList.add('open');
+  if(!players.cumple && !modalVideo.dataset.creado){ modalVideo.dataset.creado='1'; crearReproductor('cumple','playerCumple'); }
+});
+document.getElementById('closeVideoModal').addEventListener('click', cerrarVideo);
+modalVideo.addEventListener('click', e=>{ if(e.target===modalVideo) cerrarVideo(); });
 
 // ---- Contador de días ----
 function calcularDias(){
@@ -154,9 +226,9 @@ calcularDias();
 // ---- Dato random ----
 const datos = [
   "Le encantan los frappés, casi todos los días se hace uno","Es fan de Avatar y de Black Clover",
-  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice 'Buenísimo, creo' para todo",
+  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice Buenísimo, creo para todo",
   "Todavía no puede instalar Laravel","Usa Illustrator como todo un profesional","Escucha Spotify 24/7",
-  "Nunca falta a un voluntariado","Le dicen 'la rata' con mucho cariño","Come pupusas con salsa negra y medio repollo",
+  "Nunca falta a un voluntariado","Le dicen la rata con mucho cariño","Come pupusas con salsa negra y medio repollo",
   "Es alérgico","Es el traductor de inglés del grupo","Amigos desde 2022"
 ];
 function mostrarDato(){
@@ -180,7 +252,7 @@ const todasLasCosas = [
 "El que está haciendo que piense bastante para escribir 100 cosas","Al que vale la pena confiar en él ciegamente","El dramático","El chef (según él)","Mi querido amigo",
 "El \"vamos a comprar\"","Quién ve mis estados","Al que no le gusta el fútbol","El aparentemente tranquilo","El que todo quiere saber",
 "La mascota del grupo","El envía Reels","El de los apodos con \"rata\"","Al que no le gustan los k-dramas","El que me sigue llamando \"usted\"",
-"Mi compañero para todo lo académico","El \"🐀\" que me agrada tanto","Quién me ha ayudado tanto","El de las golosinas","El que le gusta ayudar a los demás",
+"Mi compañero para todo lo académico","La \"rata\" que me agrada tanto","Quién me ha ayudado tanto","El de las golosinas","El que le gusta ayudar a los demás",
 "La rata blanca","El de las fotos","El que come en clases","El que se enferma a cada rato","El que responde un día después",
 "Alguien increíble","El resiliente","El de las tostadas","El de los buenos gestos (acciones)","El responsable",
 "Al que tengo su chat fijado","El de las actividades extracurriculares","El que vive en medio de la nada","El que espera bus durante 3 horas","El de Illustrator",
@@ -189,22 +261,32 @@ const todasLasCosas = [
 "El usa Spotify 24/7","Al que no hacen administrador en los grupos","El mejor compañero que he tenido","El bromista del grupo","El come pupusas con salsa negra y medio recipiente de repollo",
 "El de los \"jssjskdjsjsjsjdjs\"","Al que le encanta el arroz cantonés","Quien no se da por vencido","La rata del salón",
 "Mi querido, estimado, irremplazable, extraordinario, fantástico, genial, generoso, servicial e increíble compañero y amigo",
-"el Rataudiel 🐀"
+"El Rataudiel"
 ];
 function mostrarCosas(limit){
   const cont = document.getElementById('contenedor100Cosas');
   const total = todasLasCosas.length;
-  const cosas = todasLasCosas.slice(0,limit).map((c,i)=>({n:i+1,t:c}));
-  const size = Math.floor(limit/3);
-  const cols = [ cosas.slice(0,size), cosas.slice(size,size*2), cosas.slice(size*2) ];
-  let html = '<div class="things-cols">';
-  cols.forEach(col=>{
-    html += '<ul>';
-    col.forEach(it=> html += `<li><span class="n">${it.n}.</span> ${it.t}</li>`);
-    html += '</ul>';
+  const verTodo = limit >= total;
+  // al ver todo: la penúltima (cierre) y la última (extra) van a todo el ancho; el resto en 3 columnas iguales
+  const nCols = verTodo ? total-2 : limit;
+  const lista = todasLasCosas.slice(0,nCols);
+  const base = Math.floor(nCols/3), resto = nCols%3;
+  const tam = [base, base+(resto===2?1:0), base+(resto>=1?1:0)];
+  const filas = Math.max(...tam);
+  let html = '<ol class="things-cols">';
+  lista.forEach((t,i)=>{
+    let col, fila;
+    if(i<tam[0]){ col=1; fila=i+1; }
+    else if(i<tam[0]+tam[1]){ col=2; fila=i-tam[0]+1; }
+    else { col=3; fila=i-tam[0]-tam[1]+1; }
+    html += `<li style="--c:${col};--r:${fila}"><span class="n">${i+1}.</span> <span>${t}</span></li>`;
   });
-  html += '</div>';
-  if(limit < total){ html += `<button class="btn-more" id="btnVerMas">Ver más (${total-limit} restantes)</button>`; }
+  if(verTodo){
+    html += `<li class="cierre" style="--c:1 / -1;--r:${filas+1}"><span class="n">${total-1}.</span> <span>${todasLasCosas[total-2]}</span></li>`;
+    html += `<li class="extra" style="--c:1 / -1;--r:${filas+2}"><span class="n">${total}.</span> <span>${todasLasCosas[total-1]}</span> <span class="tag-extra">extra</span></li>`;
+  }
+  html += '</ol>';
+  if(!verTodo){ html += `<button class="btn-more" id="btnVerMas">Ver más (${total-limit} restantes)</button>`; }
   else { html += `<button class="btn-more" id="btnVerMenos">Ver menos (volver a 30)</button>`; }
   cont.innerHTML = html;
   const bm = document.getElementById('btnVerMas'); if(bm) bm.addEventListener('click', ()=>mostrarCosas(total));
