@@ -143,7 +143,7 @@ document.getElementById('easterEggFooter').addEventListener('click', ()=>{
   modalSecreto.classList.add('open');
   confetti({particleCount:120, spread:80, origin:{y:0.8}});
 });
-document.getElementById('btnCerrarSecreto').addEventListener('click', ()=>modalSecreto.classList.remove('open'));
+document.getElementById('closeSecretoModal').addEventListener('click', ()=>modalSecreto.classList.remove('open'));
 modalSecreto.addEventListener('click', e=>{ if(e.target===modalSecreto) modalSecreto.classList.remove('open'); });
 
 // ---- WhatsApp ----
@@ -166,54 +166,40 @@ enlace.addEventListener('click', e=>{
   e.preventDefault();
   const hidden = imagenDiv.style.display==='none' || !imagenDiv.style.display;
   imagenDiv.style.display = hidden ? 'block':'none';
-  enlace.textContent = hidden ? 'Ocultar imagen':'Haz click aquí';
+  enlace.textContent = hidden ? 'Ocultar imagen':'Haz clic aquí';
   if(hidden) confetti({particleCount:50, spread:40, origin:{y:0.8}});
 });
 
-// ---- Modal video ----
-// ---- Reproductores de YouTube (si un video no se puede incrustar, prueba el siguiente) ----
-const VIDEOS = {
-  favorita: ['3XqqkrJENB4','ozQd4AxOtLI','wcbcWcK96cw','lYGZqO4kJko'],               // "Cry" - Cigarettes After Sex
-  cumple:   ['3OsHNlsp3zw','L5hubUENAdI','fCgLQ2_Tzqc','IF_et-FA9ws','uerRSQBLBRE']  // Feliz cumpleaños (ratón cantando y respaldos)
-};
-const players = {};
-let ytListo = false;
-const pendientes = [];
-function enlaceDeRespaldo(elId, videoId){
-  const el = document.getElementById(elId); if(!el || !el.parentElement) return;
-  el.parentElement.innerHTML = '<div class="video-fallback"><p>No se pudo reproducir aquí.</p><a class="link-btn" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v='+videoId+'">Abrir en YouTube</a></div>';
-}
-function crearReproductor(clave, elId){
-  const ids = VIDEOS[clave]; let i = 0;
-  const hacer = ()=>{
-    const vars = {rel:0, modestbranding:1, playsinline:1};
-    if(location.protocol.indexOf('http')===0) vars.origin = location.origin;
-    players[clave] = new YT.Player(elId, {
-      videoId: ids[0], width:'100%', height:'100%', playerVars: vars,
-      events:{ onError: ()=>{
-        i++;
-        if(i<ids.length) players[clave].loadVideoById(ids[i]);
-        else enlaceDeRespaldo(elId, ids[0]);
-      } }
+// ---- Videos locales ----
+// Autoajuste de ruta: prueba video/, ../video/ y ../../video/
+(function(){
+  const rutas=['video/','../video/','../../video/'];
+  document.querySelectorAll('video').forEach(v=>{
+    const fuente=v.querySelector('source'); if(!fuente) return;
+    const archivo=fuente.getAttribute('src').replace(/^(\.\.\/)*video\//,'');
+    let i=0;
+    fuente.addEventListener('error',()=>{
+      i++;
+      if(i<rutas.length){ fuente.setAttribute('src',rutas[i]+archivo); v.load(); }
     });
-  };
-  if(ytListo) hacer(); else pendientes.push(hacer);
-}
-window.onYouTubeIframeAPIReady = ()=>{ ytListo=true; pendientes.splice(0).forEach(f=>f()); };
-crearReproductor('favorita','playerCancion');
+  });
+})();
 
-// ---- Modal canción de cumpleaños (botón flotante) ----
-const modalVideo = document.getElementById('modalVideo');
+const videoCancion = document.getElementById('videoCancion');
+const videoCumple  = document.getElementById('videoCumple');
+const modalVideo   = document.getElementById('modalVideo');
 function cerrarVideo(){
   modalVideo.classList.remove('open');
-  if(players.cumple && players.cumple.pauseVideo) players.cumple.pauseVideo();
+  videoCumple.pause();
 }
 document.getElementById('btnVideoModal').addEventListener('click', ()=>{
   modalVideo.classList.add('open');
-  if(!players.cumple && !modalVideo.dataset.creado){ modalVideo.dataset.creado='1'; crearReproductor('cumple','playerCumple'); }
+  if(videoCancion) videoCancion.pause();
+  videoCumple.play().catch(()=>{});
 });
 document.getElementById('closeVideoModal').addEventListener('click', cerrarVideo);
 modalVideo.addEventListener('click', e=>{ if(e.target===modalVideo) cerrarVideo(); });
+if(videoCancion) videoCancion.addEventListener('play', ()=>videoCumple.pause());
 
 // ---- Contador de días ----
 function calcularDias(){
@@ -226,9 +212,9 @@ calcularDias();
 // ---- Dato random ----
 const datos = [
   "Le encantan los frappés, casi todos los días se hace uno","Es fan de Avatar y de Black Clover",
-  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice Buenísimo, creo para todo",
+  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice “Buenísimo, creo” para todo",
   "Todavía no puede instalar Laravel","Usa Illustrator como todo un profesional","Escucha Spotify 24/7",
-  "Nunca falta a un voluntariado","Le dicen la rata con mucho cariño","Come pupusas con salsa negra y medio repollo",
+  "Nunca falta a un voluntariado","Le dicen “la rata” con mucho cariño","Come pupusas con salsa negra y medio repollo",
   "Es alérgico","Es el traductor de inglés del grupo","Amigos desde 2022"
 ];
 function mostrarDato(){
@@ -243,22 +229,22 @@ const todasLasCosas = [
 "La rata","El chico que era introvertido","El talentoso","El de muchas capacidades y habilidades","El bondadoso",
 "Servicial","Solidario","Medio perfeccionista","El de los tres leches","El alérgico",
 "La Rata Colocha","Mi dúo en estudio","Mi amigo favorito","El decidido","Fan de Avatar",
-"Al que le gusta la comida china","El de los frappé","El que nunca duerme","El alto","Termómetro",
-"Mi compañero de la universidad","Mi compañero del programa","El de los voluntariados","El que tiene como mil conocidos","El busca oportunidades académicas",
-"Al que le gusta el color azul","El que le gusta el diseño","El juega Minecraft","El comprometido con la Iglesia","El de los retiros",
-"El creativo","El amigo que apoya en todo","El comparte comida","El confiable","El que sabe hacer de todo",
-"El traductor de inglés","El empático","Alguien con quien no creí que seríamos amigos","Con quién se puede hablar de cualquier tema","Alguien a quien le puedo hablar de lo mismo una y otra vez",
-"Quién se preocupa por los demás","Quién a veces duda","El del botiquín","Quién anda mil cosas en la mochila","El insistente",
+"Al que le gusta la comida china","El de los frappés","El que nunca duerme","El alto","Termómetro",
+"Mi compañero de la universidad","Mi compañero del programa","El de los voluntariados","El que tiene como mil conocidos","El que busca oportunidades académicas",
+"Al que le gusta el color azul","El que le gusta el diseño","El que juega Minecraft","El comprometido con la Iglesia","El de los retiros",
+"El creativo","El amigo que apoya en todo","El que comparte comida","El confiable","El que sabe hacer de todo",
+"El traductor de inglés","El empático","Alguien con quien no creí que seríamos amigos","Con quien se puede hablar de cualquier tema","Alguien a quien le puedo hablar de lo mismo una y otra vez",
+"Quien se preocupa por los demás","Quien a veces duda","El del botiquín","Quien anda mil cosas en la mochila","El insistente",
 "El que está haciendo que piense bastante para escribir 100 cosas","Al que vale la pena confiar en él ciegamente","El dramático","El chef (según él)","Mi querido amigo",
-"El \"vamos a comprar\"","Quién ve mis estados","Al que no le gusta el fútbol","El aparentemente tranquilo","El que todo quiere saber",
-"La mascota del grupo","El envía Reels","El de los apodos con \"rata\"","Al que no le gustan los k-dramas","El que me sigue llamando \"usted\"",
-"Mi compañero para todo lo académico","La \"rata\" que me agrada tanto","Quién me ha ayudado tanto","El de las golosinas","El que le gusta ayudar a los demás",
+"El \"vamos a comprar\"","Quien ve mis estados","Al que no le gusta el fútbol","El aparentemente tranquilo","El que todo quiere saber",
+"La mascota del grupo","El que envía Reels","El de los apodos con \"rata\"","Al que no le gustan los k-dramas","El que me sigue llamando \"usted\"",
+"Mi compañero para todo lo académico","La \"rata\" que me agrada tanto","Quien me ha ayudado tanto","El de las golosinas","El que le gusta ayudar a los demás",
 "La rata blanca","El de las fotos","El que come en clases","El que se enferma a cada rato","El que responde un día después",
 "Alguien increíble","El resiliente","El de las tostadas","El de los buenos gestos (acciones)","El responsable",
 "Al que tengo su chat fijado","El de las actividades extracurriculares","El que vive en medio de la nada","El que espera bus durante 3 horas","El de Illustrator",
 "El que trata de entender a los demás","Mi ratiamigo (rata + amigo)","Al que no le gusta decir su fecha de cumpleaños","El que quiere ir a todos lados","El de los stickers",
 "El de los videos con IA","El inventor","El ocupado","El que no puede instalar Laravel","El que incluye a todos en las cosas",
-"El usa Spotify 24/7","Al que no hacen administrador en los grupos","El mejor compañero que he tenido","El bromista del grupo","El come pupusas con salsa negra y medio recipiente de repollo",
+"El que usa Spotify 24/7","Al que no hacen administrador en los grupos","El mejor compañero que he tenido","El bromista del grupo","El que come pupusas con salsa negra y medio recipiente de repollo",
 "El de los \"jssjskdjsjsjsjdjs\"","Al que le encanta el arroz cantonés","Quien no se da por vencido","La rata del salón",
 "Mi querido, estimado, irremplazable, extraordinario, fantástico, genial, generoso, servicial e increíble compañero y amigo",
 "El Rataudiel"
