@@ -171,16 +171,46 @@ enlace.addEventListener('click', e=>{
 });
 
 // ---- Videos locales ----
-// Autoajuste de ruta: prueba video/, ../video/ y ../../video/
+// Usa la ruta que pongas en el HTML; si no carga, prueba una y dos carpetas más arriba (../ y ../../).
+// Si el video no se puede mostrar, avisa en pantalla por qué.
 (function(){
-  const rutas=['video/','../video/','../../video/'];
+  const limpiar = r => encodeURI(decodeURI(r));
   document.querySelectorAll('video').forEach(v=>{
-    const fuente=v.querySelector('source'); if(!fuente) return;
-    const archivo=fuente.getAttribute('src').replace(/^(\.\.\/)*video\//,'');
-    let i=0;
-    fuente.addEventListener('error',()=>{
+    const fuente = v.querySelector('source'); if(!fuente) return;
+    const original = fuente.getAttribute('src');
+    const k = original.indexOf('#');
+    const base = k>-1 ? original.slice(0,k) : original;
+    const hash = k>-1 ? original.slice(k) : '';
+    const rutas = [base, '../'+base, '../../'+base];
+    const marco = v.parentElement;
+    let i = 0, avisado = false;
+
+    function aviso(html){
+      if(avisado) return; avisado = true;
+      const d = document.createElement('div'); d.className = 'video-error'; d.innerHTML = '<p>'+html+'</p>';
+      marco.appendChild(d);
+    }
+    async function diagnosticar(){
+      const nombre = decodeURI(base);
+      let msg = 'No se pudo cargar <b>'+nombre+'</b>. Revisa el nombre, la carpeta y que sea MP4 (video H.264 y audio AAC).';
+      if(location.protocol.indexOf('http')===0){
+        try{
+          const r = await fetch(limpiar(rutas[0]), {method:'HEAD'});
+          msg = r.ok
+            ? 'El archivo <b>'+nombre+'</b> existe, pero el navegador no puede reproducir su formato. Conviértelo a MP4 con video H.264 y audio AAC.'
+            : 'No se encontró <b>'+nombre+'</b>. Revisa el nombre y que esté en esa carpeta.';
+        }catch(e){}
+      }
+      aviso(msg);
+    }
+    fuente.addEventListener('error', ()=>{
       i++;
-      if(i<rutas.length){ fuente.setAttribute('src',rutas[i]+archivo); v.load(); }
+      if(i<rutas.length){ fuente.setAttribute('src', limpiar(rutas[i])+hash); v.load(); }
+      else diagnosticar();
+    });
+    v.addEventListener('error', diagnosticar);                 // errores de decodificación
+    v.addEventListener('loadedmetadata', ()=>{                 // suena pero no hay imagen (códec no compatible)
+      if(v.videoWidth===0) aviso('El audio carga, pero el navegador no puede mostrar la imagen de <b>'+decodeURI(base)+'</b>. Conviértelo a MP4 con video H.264 y audio AAC.');
     });
   });
 })();

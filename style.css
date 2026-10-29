@@ -353,3 +353,8 @@ html{-webkit-text-size-adjust:100%;}
 
 /* ===== PERFIL: párrafos ===== */
 .profile p + p{margin-top:.8em;}
+
+/* ---- Aviso cuando un video no se puede reproducir ---- */
+.video-frame{position:relative;}
+.video-error{position:absolute; inset:0; display:flex; align-items:center; justify-content:center; text-align:center; padding:18px; background:rgba(4,12,28,.94); color:var(--muted); font-size:.88rem; line-height:1.5; z-index:3;}
+.video-error b{color:var(--text); overflow-wrap:anywhere;}
