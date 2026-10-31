@@ -154,7 +154,7 @@ form.addEventListener('submit', e=>{
   e.preventDefault();
   const nombre = document.getElementById('nombre').value;
   const mensaje = document.getElementById('mensaje').value;
-  const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Rataudiel*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
+  const url = `https://wa.me/${numeroTelefono}?text=*Mensaje para Esmeralda*%0A%0A*De:* ${nombre}%0A*Mensaje:* ${mensaje}`;
   successDiv.style.display='block';
   setTimeout(()=>{ window.open(url,'_blank'); form.reset(); setTimeout(()=>successDiv.style.display='none',5000); },1000);
 });
@@ -303,7 +303,7 @@ function mostrarCosas(limit){
   }
   html += '</ol>';
   if(!verTodo){ html += `<button class="btn-more" id="btnVerMas">Ver más (${total-limit} restantes)</button>`; }
-  else { html += `<button class="btn-more" id="btnVerMenos">Ver menos (volver a 30)</button>`; }
+  else { html += `<button class="btn-more" id="btnVerMenos">Ver menos</button>`; }
   cont.innerHTML = html;
   const bm = document.getElementById('btnVerMas'); if(bm) bm.addEventListener('click', ()=>mostrarCosas(total));
   const bl = document.getElementById('btnVerMenos'); if(bl) bl.addEventListener('click', ()=>mostrarCosas(30));
