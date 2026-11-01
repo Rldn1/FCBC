@@ -47,14 +47,16 @@ function borrar(i,cb){
 
 // ---- Modal entrada + confeti ----
 const modalEntrada = document.getElementById('modalEntrada');
-window.addEventListener('load', ()=>{
-  modalEntrada.classList.add('open');
-  let active=true;
-  const iv = setInterval(()=>{
-    if(!modalEntrada.classList.contains('open')){ clearInterval(iv); active=false; return; }
-    confetti({particleCount:60, spread:70, origin:{y:0.7}, startVelocity:15, colors:['#4f8fd6','#7c6ff0','#f0a944','#2c5ea3']});
-  },1800);
-});
+modalEntrada.classList.add('open');
+function rafaga(){
+  if(!window.confetti) return;
+  confetti({particleCount:60, spread:70, origin:{y:0.7}, startVelocity:15, colors:['#4f8fd6','#7c6ff0','#f0a944','#2c5ea3']});
+}
+setTimeout(rafaga, 400);
+const ivConfeti = setInterval(()=>{
+  if(!modalEntrada.classList.contains('open')){ clearInterval(ivConfeti); return; }
+  rafaga();
+},1800);
 document.getElementById('btnCerrarModal').addEventListener('click',()=>modalEntrada.classList.remove('open'));
 
 // ---- Tema oscuro / claro (por defecto oscuro) ----
@@ -104,24 +106,60 @@ window.addEventListener('resize', ()=>{
 });
 setTimeout(()=>movePill(linkById('inicio')), 200);
 
-// ---- Carrusel ----
+// ---- Carrusel (bucle continuo: después de la última vuelve a salir la primera, siempre hacia el mismo lado) ----
 const track = document.getElementById('carTrack');
 const slides = track.children;
 const dotsWrap = document.getElementById('carDots');
-let curr = 0;
-for(let i=0;i<slides.length;i++){
+const totalSlides = slides.length;
+const VELOCIDAD_CARRUSEL = 4000;   // milisegundos entre fotos
+const TRANSICION = 'transform .5s cubic-bezier(.65,0,.35,1)';
+[...slides].forEach((sl,i)=>{ sl.dataset.i = i; });
+let curr = 0, moviendo = false;
+for(let i=0;i<totalSlides;i++){
   const d = document.createElement('div'); d.className='car-dot'+(i===0?' active':'');
   d.addEventListener('click', ()=>goTo(i));
   dotsWrap.appendChild(d);
 }
-function goTo(i){
-  curr = (i+slides.length)%slides.length;
-  track.style.transform = `translateX(-${curr*100}%)`;
-  [...dotsWrap.children].forEach((d,idx)=>d.classList.toggle('active',idx===curr));
+function marcarPunto(){ [...dotsWrap.children].forEach((d,idx)=>d.classList.toggle('active',idx===curr)); }
+function alTerminar(fn){
+  let hecho = false;
+  const f = e=>{ if(hecho || (e && (e.target!==track || e.propertyName!=='transform'))) return; hecho = true; track.removeEventListener('transitionend',f); fn(); };
+  track.addEventListener('transitionend', f);
+  setTimeout(()=>f(), 700);
 }
-document.getElementById('carPrev').addEventListener('click', ()=>goTo(curr-1));
-document.getElementById('carNext').addEventListener('click', ()=>goTo(curr+1));
-setInterval(()=>goTo(curr+1), 6000);
+function siguiente(){
+  if(moviendo) return; moviendo = true;
+  track.style.transition = TRANSICION;
+  track.style.transform = 'translateX(-100%)';
+  alTerminar(()=>{
+    track.style.transition = 'none';
+    track.appendChild(track.firstElementChild);        // la que ya pasó se va al final
+    track.style.transform = 'translateX(0)';
+    curr = (curr+1)%totalSlides; marcarPunto();
+    void track.offsetWidth; moviendo = false;
+  });
+}
+function anterior(){
+  if(moviendo) return; moviendo = true;
+  track.style.transition = 'none';
+  track.insertBefore(track.lastElementChild, track.firstElementChild);   // la última pasa al inicio
+  track.style.transform = 'translateX(-100%)';
+  void track.offsetWidth;
+  track.style.transition = TRANSICION;
+  track.style.transform = 'translateX(0)';
+  curr = (curr-1+totalSlides)%totalSlides; marcarPunto();
+  alTerminar(()=>{ moviendo = false; });
+}
+function goTo(i){
+  if(moviendo || i===curr) return;
+  track.style.transition = 'none';
+  while(Number(track.firstElementChild.dataset.i)!==i) track.appendChild(track.firstElementChild);
+  track.style.transform = 'translateX(0)';
+  curr = i; marcarPunto();
+}
+document.getElementById('carPrev').addEventListener('click', anterior);
+document.getElementById('carNext').addEventListener('click', siguiente);
+setInterval(siguiente, VELOCIDAD_CARRUSEL);
 
 // ---- Frases footer ----
 const frases = [
@@ -209,7 +247,8 @@ enlace.addEventListener('click', e=>{
       else diagnosticar();
     });
     v.addEventListener('error', diagnosticar);                 // errores de decodificación
-    v.addEventListener('loadedmetadata', ()=>{                 // suena pero no hay imagen (códec no compatible)
+    v.addEventListener('loadedmetadata', ()=>{
+      if(v.videoWidth && v.videoHeight) marco.style.setProperty('--ar', (v.videoWidth/v.videoHeight).toFixed(4));   // el marco se ajusta al video
       if(v.videoWidth===0) aviso('El audio carga, pero el navegador no puede mostrar la imagen de <b>'+decodeURI(base)+'</b>. Conviértelo a MP4 con video H.264 y audio AAC.');
     });
   });
@@ -233,7 +272,7 @@ if(videoCancion) videoCancion.addEventListener('play', ()=>videoCumple.pause());
 
 // ---- Contador de días ----
 function calcularDias(){
-  const inicio = new Date(2022,0,1); const hoy = new Date();
+  const inicio = new Date(2023,0,1); const hoy = new Date();
   const dias = Math.ceil(Math.abs(hoy-inicio)/(1000*60*60*24));
   document.getElementById('contadorDias').textContent = dias;
 }
@@ -245,7 +284,7 @@ const datos = [
   "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice “Buenísimo, creo” para todo",
   "Todavía no puede instalar Laravel","Usa Illustrator como todo un profesional","Escucha Spotify 24/7",
   "Nunca falta a un voluntariado","Le dicen “la rata” con mucho cariño","Come pupusas con salsa negra y medio repollo",
-  "Es alérgico","Es el traductor de inglés del grupo","Amigos desde 2022"
+  "Es alérgico","Es el traductor de inglés del grupo","Amigos desde 2023"
 ];
 function mostrarDato(){
   const el = document.getElementById('datoRandomHamster');
@@ -302,7 +341,7 @@ function mostrarCosas(limit){
     html += `<li class="extra" style="--c:1 / -1;--r:${filas+2}"><span class="n">${total}.</span> <span>${todasLasCosas[total-1]}</span> <span class="tag-extra">extra</span></li>`;
   }
   html += '</ol>';
-  if(!verTodo){ html += `<button class="btn-more" id="btnVerMas">Ver más (${total-limit} restantes)</button>`; }
+  if(!verTodo){ html += `<button class="btn-more" id="btnVerMas">Ver más</button>`; }
   else { html += `<button class="btn-more" id="btnVerMenos">Ver menos</button>`; }
   cont.innerHTML = html;
   const bm = document.getElementById('btnVerMas'); if(bm) bm.addEventListener('click', ()=>mostrarCosas(total));

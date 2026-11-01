@@ -6,13 +6,14 @@
 <title>Feliz cumpleaños — Rataudiel</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1"></script>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap"></noscript>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1" defer></script>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <!-- MODAL ENTRADA -->
-<div class="modal-backdrop" id="modalEntrada">
+<div class="modal-backdrop open" id="modalEntrada">
   <div class="modal-box">
     <img class="chibi" src="img/18.png" alt="Yami chibi">
     <h4>¿Portal de felicidad?</h4>
@@ -44,7 +45,7 @@
   <div class="wrap hero-inner">
     <div class="hero-text">
       <h1 id="tituloDinamico"></h1>
-      <p class="lead">Un año más, más aventuras, más clases y más risas</p>
+      <p class="lead">Un año más, más aventuras, más clases y más risas.</p>
     </div>
     <div class="hero-photo-ring"><div class="hero-photo"><img src="img/rata.jpeg" alt="Rataudiel"></div></div>
   </div>
@@ -56,11 +57,12 @@
   <section>
     <div class="section-head">
       <div class="section-eyebrow">Momentos</div>
-      <h2>Juntos, en distintas escenas.</h2>
+      <h2>Juntos, en distintas escenas</h2>
+      <p class="section-sub">Algunos de los momentos que nos trajeron hasta aquí.</p>
     </div>
     <div class="carousel">
       <div class="car-track" id="carTrack">
-        <div class="car-slide"><img src="img/31.jpeg" alt="Momento 1"><div class="car-cap">Nuestro primer Hackathon</div></div>
+        <div class="car-slide"><img src="img/31.jpeg" alt="Momento 1"><div class="car-cap">Nuestro primer hackathon</div></div>
         <div class="car-slide"><img src="img/33.jpeg" alt="Momento 2"><div class="car-cap">Día de voluntariado</div></div>
         <div class="car-slide"><img src="img/32.jpeg" alt="Momento 3"><div class="car-cap">Primer viaje</div></div>
         <div class="car-slide"><img src="img/30.jpeg" alt="Momento 4"><div class="car-cap">Chat importante</div></div>
@@ -76,6 +78,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Galería</div>
       <h2>Su esencia</h2>
+      <p class="section-sub">Un poquito de él, tal como es.</p>
     </div>
     <div class="grid-4">
       <div class="glass gal-item"><img src="img/43.jpeg"><p>El de Illustrator</p></div>
@@ -90,6 +93,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Frases</div>
       <h2>Lo que se queda</h2>
+      <p class="section-sub">Palabras y recuerdos que se quedan para siempre.</p>
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
@@ -101,7 +105,7 @@
     </div>
     <div class="tl-item">
       <div class="tl-dot"></div>
-      <div class="tl-body"><h3>Amigos desde 2022</h3><p>Compañeros de universidad y del programa, y ahora grandes amigos. Aunque no hablemos por días, siempre está ahí.</p><small>2022 — presente</small></div>
+      <div class="tl-body"><h3>Amigos desde 2023</h3><p>Compañeros de universidad y del programa, y ahora grandes amigos. Aunque no hablemos por días, siempre está ahí.</p><small>2023 — presente</small></div>
     </div>
     <div class="grid-3 frases-img" style="margin-top:30px;">
       <div class="glass frase-img"><img src="img/1.jfif" alt="Existen personas mágicas que te salvan y ni se enteran. Amigos les llaman."></div>
@@ -110,7 +114,7 @@
     </div>
     <div class="grid-2" style="margin-top:14px;">
       <div class="glass frase-card" style="padding:26px;">
-        <p style="font-style:italic; color:var(--text); font-size:1.02rem; margin:0;">"Como una buena variable, esta amistad nunca cambia de valor — pase lo que pase, sigue siendo la misma."</p>
+        <p style="font-style:italic; color:var(--text); font-size:1.02rem; margin:0;">"Como una buena constante, esta amistad nunca cambia de valor: pase lo que pase, sigue siendo la misma."</p>
       </div>
       <div class="glass frase-card" style="padding:26px;">
         <p style="font-style:italic; color:var(--text); font-size:1.02rem; margin:0;">"No hace falta hacer deploy todos los días para que una amistad siga corriendo en producción."</p>
@@ -123,6 +127,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Su mundo</div>
       <h2>El universo de Rataudiel</h2>
+      <p class="section-sub">Lo que ve, lo que escucha y lo que más disfruta.</p>
     </div>
     <div class="grid-3">
       <div class="glass serie-card"><img src="img/9.jfif" alt="Avatar"><p class="t">Avatar</p><p class="s">Su película favorita</p></div>
@@ -152,12 +157,13 @@
     <div class="section-head">
       <div class="section-eyebrow">Perfil</div>
       <h2>Quién es Rataudiel</h2>
+      <p class="section-sub">Los datos de siempre y lo que de verdad importa.</p>
     </div>
     <div class="glass profile">
       <div>
         <h3>Datos rápidos</h3>
         <ul>
-          <li><b>Amigos desde:</b> 2022</li>
+          <li><b>Amigos desde:</b> 2023</li>
           <li><b>Color favorito:</b> Azul</li>
           <li><b>Pasatiempo favorito:</b> Escuchar música</li>
           <li><b>Película favorita:</b> Avatar</li>
@@ -174,7 +180,6 @@
         <p>Es el amigo que todos necesitamos en la vida: el que está en las buenas y en las malas, el que celebra tus logros como si fueran suyos y el que te recuerda que puedes seguir. Y aunque a veces no se lo diga, valoro cada consejo, cada risa y cada momento en el que simplemente estuvo ahí.</p>
         <p>Tenerlo como amigo es de esas cosas que no se explican, solo se agradecen. Y ojalá él también sienta que puede contar conmigo. Porque una amistad así no se encuentra en cualquier lado.</p>
         <p class="quote">"Gracias por estar siempre, Rataudiel"
-          <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
         </p>
       </div>
     </div>
@@ -185,6 +190,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Lista</div>
       <h2>100 cosas sobre Rataudiel</h2>
+      <p class="section-sub">Cada una cuenta algo de él; juntas lo dicen todo.</p>
     </div>
     <div class="glass things">
       <p class="things-lead">Pequeñas cosas que lo hacen único</p>
@@ -197,6 +203,7 @@
     <div class="section-head">
       <div class="section-eyebrow">Mensaje</div>
       <h2>¿Quieres dejarme un mensaje?</h2>
+      <p class="section-sub">Un saludo, una idea o lo que quieras contarme.</p>
     </div>
     <div class="glass form-card">
       <div class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v11H9l-4 4V5Z"/></svg></div>
@@ -231,20 +238,17 @@
 <footer>
   <div class="wrap">
     <div class="foot-row">
-      <div class="foot-days"><b id="contadorDias">0</b> Días de amistad <span style="color:var(--muted); font-size:.85rem;">· Desde 2022</span></div>
+      <div class="foot-days"><b id="contadorDias">0</b> Días de amistad <span style="color:var(--muted); font-size:.85rem;">· Desde 2023</span></div>
       <div class="foot-phrase">
         <span id="fraseRandomFooter">"La amistad es como el café: calienta el alma."</span>
         <button id="btnFraseFooter" class="foot-btn">Otra frase</button>
       </div>
     </div>
     <div class="foot-fact">
-      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
       <span id="datoRandomHamster">Cargando dato...</span>
-      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
     </div>
     <div class="foot-bottom">
       © 2026 · Para <b>Rataudiel</b>
-      <svg class="rat-ic" viewBox="0 0 24 24" fill="currentColor"><circle cx="8" cy="6" r="2.2"/><circle cx="14" cy="6" r="2.2"/><circle cx="11" cy="12" r="6"/></svg>
       <span class="egg" id="easterEggFooter">Mensaje secreto</span>
     </div>
   </div>
