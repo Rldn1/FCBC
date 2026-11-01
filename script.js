@@ -281,7 +281,7 @@ calcularDias();
 // ---- Dato random ----
 const datos = [
   "Le encantan los frappés, casi todos los días se hace uno","Es fan de Avatar y de Black Clover",
-  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice “Buenísimo, creo” para todo",
+  "Juega Minecraft en su tiempo libre","Su color favorito es el azul","Dice Buenísimo para todo",
   "Todavía no puede instalar Laravel","Usa Illustrator como todo un profesional","Escucha Spotify 24/7",
   "Nunca falta a un voluntariado","Le dicen “la rata” con mucho cariño","Come pupusas con salsa negra y medio repollo",
   "Es alérgico","Es el traductor de inglés del grupo","Amigos desde 2023"
@@ -296,9 +296,9 @@ mostrarDato(); setInterval(mostrarDato, 5000);
 // ---- 101 cosas ----
 const todasLasCosas = [
 "La rata","El chico que era introvertido","El talentoso","El de muchas capacidades y habilidades","El bondadoso",
-"Servicial","Solidario","Medio perfeccionista","El de los tres leches","El alérgico",
+"Servicial","Solidario","Medio perfeccionista","El de los postres tres leches","El alérgico",
 "La Rata Colocha","Mi dúo en estudio","Mi amigo favorito","El decidido","Fan de Avatar",
-"Al que le gusta la comida china","El de los frappés","El que nunca duerme","El alto","Termómetro",
+"Al que le gusta la comida china","El de los frappés","El que nunca duerme","El alto","Termómetro (se pone rojo al reirse o avergonzarse)",
 "Mi compañero de la universidad","Mi compañero del programa","El de los voluntariados","El que tiene como mil conocidos","El que busca oportunidades académicas",
 "Al que le gusta el color azul","El que le gusta el diseño","El que juega Minecraft","El comprometido con la Iglesia","El de los retiros",
 "El creativo","El amigo que apoya en todo","El que comparte comida","El confiable","El que sabe hacer de todo",
@@ -316,7 +316,7 @@ const todasLasCosas = [
 "El que usa Spotify 24/7","Al que no hacen administrador en los grupos","El mejor compañero que he tenido","El bromista del grupo","El que come pupusas con salsa negra y medio recipiente de repollo",
 "El de los \"jssjskdjsjsjsjdjs\"","Al que le encanta el arroz cantonés","Quien no se da por vencido","La rata del salón",
 "Mi querido, estimado, irremplazable, extraordinario, fantástico, genial, generoso, servicial e increíble compañero y amigo",
-"El Rataudiel"
+"Rataudiel"
 ];
 function mostrarCosas(limit){
   const cont = document.getElementById('contenedor100Cosas');
